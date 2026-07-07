@@ -1,2 +1,2 @@
 # nexus-finance
-App de gestão financeira pessoal e doméstica para Android.
+Aplicativo Android de controle financeiro pessoal e familiar com IA para leitura de recibos e análise de gastos.
