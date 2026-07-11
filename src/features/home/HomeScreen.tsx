@@ -1,98 +1,125 @@
-import { StyleSheet, Text, View } from 'react-native';
+import { Pressable, SafeAreaView, StyleSheet, Text, View } from 'react-native';
 
 import { appConfig } from '../../config/app';
 import { colors } from '../../theme/colors';
 
-export function HomeScreen() {
+type HomeScreenProps = {
+  activeSpaceName: string;
+  userEmail: string;
+  onSignOut: () => void;
+};
+
+export function HomeScreen({
+  activeSpaceName,
+  userEmail,
+  onSignOut,
+}: HomeScreenProps) {
   return (
-    <View style={styles.container}>
-      <View style={styles.card}>
+    <SafeAreaView style={styles.container}>
+      <View style={styles.content}>
         <View style={styles.badge}>
-          <Text style={styles.badgeText}>FASE 1</Text>
+          <Text style={styles.badgeText}>Fase 1</Text>
         </View>
 
-        <Text style={styles.title}>{appConfig.name}</Text>
+        <Text style={styles.title}>Nexus Finance</Text>
 
-        <Text style={styles.description}>
-          Fundação do aplicativo configurada com sucesso.
+        <Text style={styles.subtitle}>
+          Fundação do aplicativo pronta para autenticação, espaços financeiros e
+          evolução do domínio.
         </Text>
 
-        <View style={styles.status}>
-          <View style={styles.statusIndicator} />
-
-          <Text style={styles.statusText}>
-            Projeto pronto para receber a autenticação
-          </Text>
+        <View style={styles.card}>
+          <Text style={styles.cardLabel}>Usuário conectado</Text>
+          <Text style={styles.cardValue}>{userEmail}</Text>
         </View>
 
-        <Text style={styles.version}>Versão {appConfig.version}</Text>
+        <View style={styles.card}>
+          <Text style={styles.cardLabel}>Espaço financeiro ativo</Text>
+          <Text style={styles.cardValue}>{activeSpaceName}</Text>
+        </View>
+
+        <Pressable style={styles.signOutButton} onPress={onSignOut}>
+          <Text style={styles.signOutButtonText}>Sair</Text>
+        </Pressable>
+
+        <Text style={styles.version}>
+          {appConfig.name} · versão {appConfig.version}
+        </Text>
       </View>
-    </View>
+    </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: colors.background,
-    justifyContent: 'center',
-    padding: 24,
-  },
-  card: {
-    width: '100%',
-    maxWidth: 480,
-    alignSelf: 'center',
-    backgroundColor: colors.surface,
-    borderWidth: 1,
-    borderColor: colors.border,
-    borderRadius: 24,
-    padding: 28,
-  },
   badge: {
     alignSelf: 'flex-start',
     backgroundColor: colors.primaryLight,
     borderRadius: 999,
-    paddingHorizontal: 12,
+    paddingHorizontal: 14,
     paddingVertical: 6,
-    marginBottom: 24,
   },
   badgeText: {
     color: colors.primary,
-    fontSize: 12,
+    fontSize: 13,
     fontWeight: '700',
-    letterSpacing: 1,
   },
-  title: {
+  card: {
+    backgroundColor: colors.surface,
+    borderColor: colors.border,
+    borderRadius: 18,
+    borderWidth: 1,
+    padding: 18,
+    width: '100%',
+  },
+  cardLabel: {
+    color: colors.textMuted,
+    fontSize: 14,
+    marginBottom: 6,
+  },
+  cardValue: {
     color: colors.text,
-    fontSize: 32,
+    fontSize: 18,
     fontWeight: '700',
   },
-  description: {
+  container: {
+    backgroundColor: colors.background,
+    flex: 1,
+  },
+  content: {
+    alignItems: 'center',
+    flex: 1,
+    gap: 18,
+    justifyContent: 'center',
+    padding: 24,
+  },
+  signOutButton: {
+    alignItems: 'center',
+    backgroundColor: colors.primary,
+    borderRadius: 14,
+    paddingHorizontal: 20,
+    paddingVertical: 14,
+    width: '100%',
+  },
+  signOutButtonText: {
+    color: colors.white,
+    fontSize: 16,
+    fontWeight: '700',
+  },
+  subtitle: {
     color: colors.textMuted,
     fontSize: 16,
     lineHeight: 24,
-    marginTop: 12,
+    textAlign: 'center',
   },
-  status: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    marginTop: 28,
-  },
-  statusIndicator: {
-    width: 10,
-    height: 10,
-    borderRadius: 5,
-    backgroundColor: colors.success,
-    marginRight: 10,
-  },
-  statusText: {
-    flex: 1,
+  title: {
     color: colors.text,
-    fontSize: 14,
+    fontSize: 34,
+    fontWeight: '800',
+    textAlign: 'center',
   },
   version: {
     color: colors.textMuted,
     fontSize: 13,
-    marginTop: 32,
+    marginTop: 8,
   },
 });

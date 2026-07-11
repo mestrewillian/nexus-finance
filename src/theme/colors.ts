@@ -7,4 +7,5 @@ export const colors = {
   textMuted: '#667085',
   border: '#DDE3EA',
   success: '#15803D',
+  white: '#FFFFFF',
 } as const;
