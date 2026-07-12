@@ -1,56 +1,68 @@
-import { Pressable, SafeAreaView, StyleSheet, Text, View } from 'react-native';
+import { Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
 
+import { AccountsScreen } from '../accounts/AccountsScreen';
 import { appConfig } from '../../config/app';
 import { colors } from '../../theme/colors';
 
 type HomeScreenProps = {
+  activeSpaceId: string;
   activeSpaceName: string;
   userEmail: string;
   onSignOut: () => void;
 };
 
 export function HomeScreen({
+  activeSpaceId,
   activeSpaceName,
   userEmail,
   onSignOut,
 }: HomeScreenProps) {
   return (
-    <SafeAreaView style={styles.container}>
-      <View style={styles.content}>
-        <View style={styles.badge}>
-          <Text style={styles.badgeText}>Fase 1</Text>
-        </View>
-
-        <Text style={styles.title}>Nexus Finance</Text>
-
-        <Text style={styles.subtitle}>
-          Fundação do aplicativo pronta para autenticação, espaços financeiros e
-          evolução do domínio.
-        </Text>
-
-        <View style={styles.card}>
-          <Text style={styles.cardLabel}>Usuário conectado</Text>
-          <Text style={styles.cardValue}>{userEmail}</Text>
-        </View>
-
-        <View style={styles.card}>
-          <Text style={styles.cardLabel}>Espaço financeiro ativo</Text>
-          <Text style={styles.cardValue}>{activeSpaceName}</Text>
-        </View>
-
-        <Pressable style={styles.signOutButton} onPress={onSignOut}>
-          <Text style={styles.signOutButtonText}>Sair</Text>
-        </Pressable>
-
-        <Text style={styles.version}>
-          {appConfig.name} · versão {appConfig.version}
-        </Text>
+    <ScrollView
+      contentContainerStyle={styles.content}
+      style={styles.container}
+    >
+      <View style={styles.badge}>
+        <Text style={styles.badgeText}>Fase 1</Text>
       </View>
-    </SafeAreaView>
+
+      <Text style={styles.title}>Nexus Finance</Text>
+
+      <Text style={styles.subtitle}>
+        Fundação do aplicativo pronta para autenticação, espaços financeiros e
+        evolução do domínio.
+      </Text>
+
+      <View style={styles.card}>
+        <Text style={styles.cardLabel}>Usuário conectado</Text>
+        <Text style={styles.cardValue}>{userEmail}</Text>
+      </View>
+
+      <View style={styles.card}>
+        <Text style={styles.cardLabel}>Espaço financeiro ativo</Text>
+        <Text style={styles.cardValue}>{activeSpaceName}</Text>
+      </View>
+
+      <View style={styles.accountsSection}>
+        <AccountsScreen financialSpaceId={activeSpaceId} />
+      </View>
+
+      <Pressable style={styles.signOutButton} onPress={onSignOut}>
+        <Text style={styles.signOutButtonText}>Sair</Text>
+      </Pressable>
+
+      <Text style={styles.version}>
+        {appConfig.name} · versão {appConfig.version}
+      </Text>
+    </ScrollView>
   );
 }
 
 const styles = StyleSheet.create({
+  accountsSection: {
+    height: 420,
+    width: '100%',
+  },
   badge: {
     alignSelf: 'flex-start',
     backgroundColor: colors.primaryLight,
@@ -87,10 +99,9 @@ const styles = StyleSheet.create({
   },
   content: {
     alignItems: 'center',
-    flex: 1,
     gap: 18,
-    justifyContent: 'center',
     padding: 24,
+    paddingTop: 56,
   },
   signOutButton: {
     alignItems: 'center',
@@ -120,6 +131,7 @@ const styles = StyleSheet.create({
   version: {
     color: colors.textMuted,
     fontSize: 13,
+    marginBottom: 24,
     marginTop: 8,
   },
 });

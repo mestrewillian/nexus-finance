@@ -109,6 +109,7 @@ export default function App() {
         <CreateSpaceScreen onSpaceCreated={handleSpaceCreated} />
       ) : (
         <HomeScreen
+          activeSpaceId={activeSpace.id}
           activeSpaceName={activeSpace.name}
           userEmail={session.user.email ?? 'Usuário autenticado'}
           onSignOut={handleSignOut}

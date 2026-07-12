@@ -18,3 +18,8 @@ O projeto utiliza o padrão de Versionamento Semântico:
 - Preparação da integração com Supabase.
 - Preparação do sistema de autenticação.
 - Preparação dos Espaços Financeiros.
+- Integração inicial com Supabase Auth.
+- Criação automática de perfis de usuário.
+- Criação e carregamento do primeiro Espaço Financeiro ativo.
+- Cadastro inicial de contas financeiras por espaço.
+- Exibição da versão do app na interface.
